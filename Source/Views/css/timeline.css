@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.table-wrapper {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
+    /* Permite rolagem vertical */
+    max-height: 400px;
+    /* Defina uma altura máxima para permitir rolagem */
+}
+
+.table-timeline {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    /* Impede a quebra de linhas nas células */
+}
+
+.table-timeline th,
+.table-timeline td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    min-width: 100px;    
+}
+
+.table-timeline td :not(td:first-child){
+    max-width: 100px;
+}
+
+.table-timeline th {
+    position: sticky;
+    top: 0;
+    /* Fixa o cabeçalho no topo */
+    background-color: #f8f9fa;
+    /* Cor de fundo para o cabeçalho */
+    z-index: 10;
+    /* Garante que o cabeçalho fique acima do conteúdo */
+}
+
+.table-timeline td:first-child {
+    position: sticky;
+    left: 0;
+    /* Fixa a primeira coluna à esquerda */
+    background-color: #ffffff;
+    /* Cor de fundo para a primeira coluna */
+    z-index: 5;
+    /* Garante que a primeira coluna fique acima do conteúdo */
+    width: auto;
+}
+
+.droppable {
+    background-color: #e9ecef;
+    min-height: 50px;
+    position: relative;
+}
+
+.event {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+    cursor: grab;
+    display: inline-block;
+    width: 90%;
+    text-align: center;
+}
+
+.event.dragging {
+    opacity: 0.5;
+}
+
+/* Linha vermelha para indicar o horário atual */
+.current-time-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background-color: red;
+    z-index: 1054;
+}
+
+.highlight {
+    border: 2px dashed #007bff;
+    /* Destaque ao passar por cima */
+}

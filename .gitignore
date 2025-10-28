@@ -1,0 +1,5 @@
+Config.php
+storage/
+signatures/
+node_modules/
+temp.php

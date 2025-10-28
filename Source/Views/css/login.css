@@ -1,0 +1,205 @@
+/*RESET NORMALIZE*/
+/* * {
+    font-family: 'Open Sans', sans-serif;
+} */
+
+p {
+    margin: 0;
+}
+
+/*LOGIN*/
+.login {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Alinha os itens à esquerda */
+    justify-content: center;
+    height: 100vh;
+    padding-left: 20px;
+    /* Adiciona um padding à esquerda */
+    background-color: grey;
+}
+
+.login img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 1px;
+}
+
+.login_box {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #a52834;
+}
+
+.login_box h1 {
+    color: #a52834;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-style: italic;
+}
+
+.login_box label {
+    display: block;
+    margin-bottom: 15px;
+    text-align: left;
+    /* Alinha os labels à esquerda */
+}
+
+.login_box .field {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000;
+    /* Cor dos labels */
+    text-transform: uppercase;
+    /* Deixa os labels em maiúsculas */
+    font-size: 14px;
+    font-style: italic;
+}
+
+.login_box input[type="email"],
+.login_box input[type="password"] {
+    width: calc(100% - 20px);
+    /* Ajusta a largura com base no padding */
+    padding: 10px;
+    border: none;
+    /* Remove a borda dos inputs */
+    border-bottom: 1px solid #3b3f45;
+    /* Borda inferior dos inputs */
+    background-color: transparent;
+    /* Fundo transparente */
+    color: #000;
+    /* Cor do texto */
+    box-sizing: border-box;
+    font-size: 16px;
+    /* Tamanho da fonte dos inputs */
+    margin-bottom: 20px;
+    /* Espaçamento inferior dos inputs */
+    outline: none;
+    /* Remove o contorno quando focado */
+}
+
+.login_box input[type="email"]::placeholder,
+.login_box input[type="password"]::placeholder {
+    color: #9da5b1;
+    /* Cor do placeholder */
+}
+
+.login_box button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    /* Remove a borda do botão */
+    border-radius: 5px;
+    background-color: #a52834;
+    /* Fundo do botão */
+    color: #fff;
+    /* Cor do texto do botão */
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Transição suave para hover */
+    font-size: 16px;
+    /* Tamanho da fonte do botão */
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+.login_box button:hover {
+    background-color: #6e6e6e;
+    /* Cor do botão ao passar o mouse */
+}
+
+.login_box a {
+    color: #5a5a5a;
+    /* Cor do link */
+    text-decoration: none;
+    /* Remove sublinhado */
+    font-size: 14px;
+    /* Tamanho da fonte do link */
+}
+
+.login_box a:hover {
+    text-decoration: underline;
+    /* Sublinha ao passar o mouse */
+}
+
+.login_box footer {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    /* Alinha o footer ao centro */
+    color: #9da5b1;
+    /* Cor do footer */
+}
+
+.login_box span {
+    color: #9da5b1;
+}
+
+.check {
+    width: fit-content;
+    margin-left: auto;
+}
+
+input:-webkit-autofill::first-line {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+/*MESSAGES*/
+
+.message {
+    color: #ffffff;
+    font-size: var(--font-small);
+    font-weight: var(--weight-strong);
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #cccccc;
+
+    -webkit-border-radius: var(--radius-normal);
+    -moz-border-radius: var(--radius-normal);
+    border-radius: var(--radius-normal);
+}
+
+.ajax_response {
+    margin: 25px 0;
+}
+
+.message.success {
+    --color: var(--color-black);
+    color: var(--color);
+    border-color: var(--color);
+}
+
+.message.info {
+    --color: var(--color-black);
+    color: var(--color);
+    border-color: var(--color);
+}
+
+.message.warning {
+    --color: var(--color-black);
+    color: var(--color);
+    border-color: var(--color);
+}
+
+.message.error {
+    --color: var(--color-black);
+    color: var(--color);
+    border-color: var(--color);
+}

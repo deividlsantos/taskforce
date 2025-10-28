@@ -1,0 +1,86 @@
+*
+ {
+    font-family: 'Ubuntu';
+}
+
+
+/* Estilos gerais do calendário */
+.fc {
+    font-family: 'Ubuntu', Arial, sans-serif; /* Usar a fonte 'Inter' ou outra fonte padrão */
+}
+
+/* Cabeçalho */
+.fc-toolbar {
+    background: #f8f9fa; /* Fundo claro */
+    border-bottom: 1px solid #dee2e6; /* Borda inferior */       
+}
+
+/* Título do cabeçalho */
+.fc-toolbar h2 {
+    
+    font-size: 1.5rem;
+    
+}
+
+/* Botões do cabeçalho */
+.fc-button {
+    background: #0d6efd; /* Azul Bootstrap */
+    color: #fff; /* Texto branco */
+    border: none; /* Sem borda */
+    padding: 0.5rem 1rem; /* Espaçamento */    
+    font-size: 1rem;
+    transition: background-color 0.3s; /* Transição suave */
+    
+}
+
+.fc-button:hover {
+    background: #0b5ed7; /* Azul escuro ao passar o mouse */
+}
+
+/* Evento */
+.fc-event {
+    background: #198754; /* Verde Bootstrap */
+    color: white; /* Texto branco */
+    border: 1px solid #146c43; /* Borda verde escura */    
+    margin: 0.09em;
+    padding: 0.082em;
+    border-radius: 0.375rem; /* Bordas arredondadas (Bootstrap 5) */
+    transition: opacity 0.3s; /* Transição suave */
+}
+
+/* Evento ao passar o mouse */
+.fc-event:hover {
+    opacity: 0.8; /* Efeito de opacidade ao passar o mouse */
+}
+
+/* Grade do calendário */
+.fc-day-grid-event {
+    border-radius: 0.375rem; /* Bordas arredondadas para os eventos */
+}
+
+/* Estilo das células do calendário */
+.fc-day {
+    border: 1px solid #dee2e6; /* Borda clara nas células */
+    background: #ffffff; /* Fundo branco */
+    padding: 0.4em;
+}
+
+/* Destaque do dia atual */
+.fc-today {
+    background: #ccc; /* Fundo cinza claro para o dia atual */
+}
+
+/* Seletor de dias do calendário */
+.fc-day-number {
+    font-weight: bold; /* Negrito para os números dos dias */
+}
+
+/* Ajustes para a visualização em dispositivos móveis */
+@media (max-width: 576px) {
+    .fc-button {
+        padding: 0.25rem 0.5rem; /* Reduzir o espaçamento em dispositivos móveis */
+    }
+    .fc-toolbar h2 {
+        font-size: 1.25rem; /* Ajustar o tamanho da fonte no cabeçalho */
+    }
+}

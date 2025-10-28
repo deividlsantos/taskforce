@@ -1,0 +1,8 @@
+medicao-list = lista medicoes agrupadas por OS
+medicao-list2 = lista medicoes por clientes
+medicao-list3 = lista medicoes por obras individualmente
+medicao-list4 = lista medicoes por obras agrupadas por obras
+medicao-list5 = lista medicoes por funcionário
+medicao-pdf = pdf da medicao-list
+medicao-pdf4 = pdf da medicao-list4
+medicao-pdf5 = pdf da medicao-list5

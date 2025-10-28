@@ -1,0 +1,40 @@
+{
+  "name": "github.com/tc-sistemas",
+  "description": "TC Sistemas Comercial",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Thiago L.R. Silva",
+      "email": "prog@tcsistemas.com",
+      "homepage": "https://www.tcsistemas.com",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor",
+    "allow-plugins": {
+      "composer/installers": true,
+      "robloach/component-installer": true,
+      "oomphinc/composer-installers-extender": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Source\\": "Source/"
+    },
+    "files": [
+      "Source/Functions/functions.php"
+    ]
+  },
+  "require": {
+    "php": "^8.0",
+    "ext-pdo": "*",
+    "coffeecode/datalayer": "^1.1",
+    "league/plates": "3.*",
+    "coffeecode/router": "^1.0",
+    "fullcalendar/fullcalendar": "^3.10",
+    "dompdf/dompdf": "3.0",
+    "phpmailer/phpmailer": "^6.5",
+    "composer/metadata-minifier": "^1.0"
+  }
+}

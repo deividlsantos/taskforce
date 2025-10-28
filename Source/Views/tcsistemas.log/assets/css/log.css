@@ -1,0 +1,272 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #808080;
+    background: #F8F8FF;
+}
+
+.content {
+    display: block;
+    width: 100%;
+}
+
+.container-form {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap; /* permite quebrar de linha */
+}
+
+/* seus estilos de formulário mantidos */
+.form-group {
+    padding: 10px;
+    /*border: 1px solid black;*/
+}
+
+/* style dos selects*/
+.form-select {
+    width: 100%;
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* styles dos inputs*/
+.form-input {
+    width: 97%;
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.periodo {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+}
+
+.data {
+    padding: 5px;
+    border: 1px solid #a0a0a0;
+    border-radius: 5px;
+}
+
+/*Botão filtro*/
+.btn-filtro {
+    width: 40%;
+    height: 5vh;
+    font-size: 1.2em;
+    background: white;
+    color: #1E90FF;
+    border: 1px solid #1E90FF;
+    border-radius: 10px;
+}
+
+.btn-filtro:hover {
+    background: #1E90FF;
+    color: white;
+}
+
+/*div da tabela de informaçoes iniciais*/
+.informacao {
+    width: 100%;
+}
+
+/* Wrappper que cria a área rolável (mantém TABLE como TABLE) */
+.table-container {
+    width: 100%;
+    max-height: 55vh;
+    /* ajuste a altura visível desejada */
+    overflow-y: auto;
+    /* o scroll fica aqui, não no tbody com display:block */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Tabela principal */
+.tabela-fixa {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* fixa o cálculo de colunas */
+    border-bottom: #ccc;
+}
+
+/* células */
+.tabela-fixa th,
+.tabela-fixa td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+    /* evita quebra de linha */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* reticências quando texto grande */
+}
+
+/* cabeçalho sticky (fica preso ao topo do .table-container) */
+.tabela-fixa thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
+    z-index: 3;
+}
+
+/* larguras fixas por coluna para garantir alinhamento */
+.tabela-fixa th:nth-child(1),
+.tabela-fixa td:nth-child(1) {
+    width: 10%;
+}
+
+/* DATA */
+.tabela-fixa th:nth-child(2),
+.tabela-fixa td:nth-child(2) {
+    width: 18%;
+}
+
+/* HORA */
+.tabela-fixa th:nth-child(3),
+.tabela-fixa td:nth-child(3) {
+    width: 18%;
+}
+
+/* EMPRESA */
+.tabela-fixa th:nth-child(4),
+.tabela-fixa td:nth-child(4) {
+    width: 20%;
+}
+
+/* AÇÃO */
+.tabela-fixa th:nth-child(5),
+.tabela-fixa td:nth-child(5) {
+    width: 15%;
+}
+
+/* CAMPO */
+.tabela-fixa th:nth-child(6),
+.tabela-fixa td:nth-child(6) {
+    width: 20%;
+}
+
+/* USUARIO */
+.tabela-fixa th:nth-child(7),
+.tabela-fixa td:nth-child(7) {
+    width: 20%;
+}
+
+/* linhas zebra opcional */
+.tabela-fixa tbody tr:nth-child(odd) {
+    background: #fff;
+}
+
+.tabela-fixa tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* link para botão de ação */
+.link-acao {
+    color: black;
+    text-decoration: none;
+    border: 1px solid #1E90FF;
+    border-radius: 5px;
+    width: 50%;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* MUDANÇA ASSIM QUE COLOCAR O MOUSE EM CIMA */
+.link-acao:hover {
+    background: #1E90FF;
+    color: white;
+}
+
+/* div dos valores que foi gerado atravez da ação */
+.vlrAcao {
+    width: 100%;
+    overflow-x: auto;
+    /* barra horizontal se necessário */
+}
+
+/* outros elementos mantidos */
+.vlrAcao table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* força colunas proporcionais */
+    word-wrap: break-word;
+    /* quebra palavras longas */
+}
+
+.vlrAcao th,
+.vlrAcao td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+}
+
+/* botão de ordenção que esta na tabela */
+.ordenar {
+    float: right;
+    background: none;
+    border: none;
+}
+
+/* muda a cor de fundo do botão de ordenção quando coloca o mouse em cima*/
+.ordenar:hover {
+    background: #ccc;
+}
+
+/* configuraçoes do select multiplo */
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-select button {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+}
+
+.custom-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.custom-options label {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.custom-select.open .custom-options {
+    display: block;
+}
