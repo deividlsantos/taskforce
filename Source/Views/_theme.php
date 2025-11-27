@@ -50,6 +50,20 @@
     <script src="<?= url("Source/Views/js/folhas.js?v=") . filemtime("Source/Views/js/folhas.js"); ?>"></script>
     <script src="<?= url("Source/Views/js/timeline.js?v=") . filemtime("Source/Views/js/timeline.js"); ?>"></script>
     <script src="<?= url("Source/Views/js/rascunhos.js?v=") . filemtime("Source/Views/js/rascunhos.js"); ?>"></script>
+    <style>
+        .content {
+            position: relative;
+            background-size: cover;
+            /* ou cover */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
+            overflow: visible;
+            width: 100%;
+            z-index: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -331,21 +345,21 @@
                     </ul>
                 </div>
             </nav>
-            <main class="content">
+            <main class="content" style="<?= (!empty($empTit)) ? "background-image: url('" . CONF_FILES_URL . $emp2->logo . "')" : ""; ?>">
                 <div class="container">
                     <h1 class="titulo-pai d-flex">
                         <?= (!empty($tituloPai)) ? $this->e($tituloPai) : ""; ?>
                         <?= (!empty($tituloPai) && !empty($secTit)) ? '<span style="display: inline-block; width: 100px;"></span>' : ""; ?>
-                        <span class="titulo-secao"><?= (!empty($secTit)) ? $this->e($secTit) : ""; ?></span>
+                        <span class="titulo-secao" ><?= (!empty($secTit)) ? $this->e($secTit) : ""; ?></span>
                         <span
-                            class="titulo-secao titulo-empresa direita"><?= (!empty($empTit)) ? $this->e($empTit) : ""; ?></span>
+                            class="titulo-secao titulo-empresa direita" style="word-break: break-all; font-size: 1.8rem;"><?= (!empty($empTit)) ? $this->e($empTit) : ""; ?></span>
                         <!-- <span class="rel-options titulo-empresa">
-                            <?php if (!empty($relatorio)): ?>
-                                <button class="btn"><i class="fa fa-gear"></i></button>
-                            <?php endif; ?>
-                        </span> -->
+                                <?php if (!empty($relatorio)): ?>
+                                    <button class="btn"><i class="fa fa-gear"></i></button>
+                                <?php endif; ?>
+                            </span> -->
                     </h1>
-                    <div class="container-fluid" style="margin-top: 20px;">
+                    <div class="container-fluid" style="margin-top: 20px; z-index: 9999999;">
                         <?= $this->section("content"); ?>
                     </div>
                 </div>

@@ -8307,6 +8307,11 @@ input.awesomplete {
     --tfdash-accent: #ffc107;
 }
 
+/* 5º card (Arquivos) com roxo */
+.tfdash-card-brown {
+    --tfdash-accent: #8B4513;
+}
+
 /* garante que nunca tenha sublinhado */
 .tfdash-card,
 .tfdash-card:link,
@@ -8537,7 +8542,7 @@ input.awesomplete {
 #modalPreOs .modal-dialog {
     --bs-modal-width: 1000px;
     height: 80vh;
-    display: flex;
+    display: flex;    
 }
 
 /* Força layout em linha para que a lateral fique ao lado */
@@ -8546,7 +8551,7 @@ input.awesomplete {
     display: flex;
     flex-direction: row !important;
     align-items: stretch;
-    overflow: hidden;
+    overflow: hidden;    
 }
 
 /* Coluna principal (esquerda) */
@@ -8555,6 +8560,7 @@ input.awesomplete {
     flex-direction: column;
     flex: 1 1 auto;
     min-width: 0;
+    z-index: 9999;
 }
 
 /* Body preenche espaço entre header e footer */

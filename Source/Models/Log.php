@@ -36,7 +36,7 @@ class Log extends DataLayer
                 return $this;
             }
 
-            if ($antes == $depois) {                
+            if ($antes == $depois) {
                 return $this;
             }
 
@@ -53,7 +53,7 @@ class Log extends DataLayer
             $antes = $this->filtrarCampos($antes, $camposExcluir);
         }
 
-        if ($antes == $depois) {            
+        if ($antes == $depois) {
             return $this;
         }
 
@@ -118,5 +118,116 @@ class Log extends DataLayer
         }
 
         return implode("; ", $dadosFiltrados);
+    }
+
+    public function loadLogs(
+        $entity,
+        $id = [],
+        $acao = [],
+        $usuario = [],
+        $tabela = [],
+        $inicial = 0,
+        $final = 0,
+        $offset = 0,
+        $limit = 50
+    ) {
+        $user = new Users();
+        $emp = new Emp2();
+        $conn = Database::getInstance();
+
+        $sql = "SELECT l.*, 
+               u.nome AS usuario_nome, 
+               e.razao AS empresa_razao
+        FROM {$entity} AS l
+        LEFT JOIN {$user->getEntity()} AS u ON l.id_users = u.id
+        LEFT JOIN {$emp->getEntity()} AS e ON l.id_emp2 = e.id";
+
+        $conditions = [];
+        $params = [];
+
+        // Normalização de arrays
+        $normalize = function ($value) {
+            if ($value === null || $value === '' || (is_array($value) && empty($value))) {
+                return [];
+            }
+            return is_array($value) ? $value : [$value];
+        };
+
+        $id = $normalize($id);
+        $acao = $normalize($acao);
+        $tabela = $normalize($tabela);
+        $usuario = $normalize($usuario);
+
+        if (!empty($id)) {
+            $placeholders = implode(',', array_fill(0, count($id), '?'));
+            $conditions[] = "l.id_emp2 IN ($placeholders)";
+            $params = array_merge($params, $id);
+        }
+
+        if (!empty($acao)) {
+            $placeholders = implode(',', array_fill(0, count($acao), '?'));
+            $conditions[] = "l.acao IN ($placeholders)";
+            $params = array_merge($params, $acao);
+        }
+
+        if (!empty($tabela)) {
+            $placeholders = implode(',', array_fill(0, count($tabela), '?'));
+            $conditions[] = "l.tabela IN ($placeholders)";
+            $params = array_merge($params, $tabela);
+        }
+
+        if (!empty($usuario)) {
+            $placeholders = implode(',', array_fill(0, count($usuario), '?'));
+            $conditions[] = "l.id_users IN ($placeholders)";
+            $params = array_merge($params, $usuario);
+        }
+
+        if (!empty($inicial) && !empty($final)) {
+            $conditions[] = "DATE(l.data_hora) BETWEEN ? AND ?";
+            $params[] = $inicial;
+            $params[] = $final;
+        } elseif (!empty($inicial)) {
+            $conditions[] = "DATE(l.data_hora) = ?";
+            $params[] = $inicial;
+        } elseif (!empty($final)) {
+            $conditions[] = "DATE(l.data_hora) = ?";
+            $params[] = $final;
+        }
+
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(' AND ', $conditions);
+        }
+
+        // 🔹 Mantém apenas parâmetros posicionais (sem :limit nem :offset)
+        $sql .= " ORDER BY l.id DESC LIMIT ? OFFSET ?";
+
+        $params[] = (int)$limit;
+        $params[] = (int)$offset;
+
+        $stmt = $conn->prepare($sql);
+
+        // Faz o bind manual com tipos adequados
+        foreach ($params as $index => $value) {
+            $type = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+            $stmt->bindValue($index + 1, $value, $type);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function loadAcao($id, $status)
+    {
+        $conn = Database::getInstance();
+
+        $sql = "SELECT valores_antes, valores_depois 
+        FROM log WHERE id = :id AND acao = :status";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

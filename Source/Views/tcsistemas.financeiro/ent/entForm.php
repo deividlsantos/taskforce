@@ -59,7 +59,7 @@
             <label for="ent_endereco">Endereço:</label>
             <input type="text" id="ent_endereco" name="ent_endereco" value="<?= ($ent != "") ? $ent->endereco : ''; ?>">
         </div>
-
+        
         <div class="fcad-form-group">
             <label for="ent_numero">Número:</label>
             <input type="text" id="ent_numero" name="ent_numero" value="<?= ($ent != "") ? $ent->numero : ''; ?>">
@@ -83,7 +83,7 @@
             <label for="ent_cidade">Cidade:</label>
             <input type="text" id="ent_cidade" name="ent_cidade" value="<?= ($ent != "") ? $ent->cidade : ''; ?>">
         </div>
-
+        
         <div class="fcad-form-group coluna10">
             <label for="ent_uf">UF:</label>
             <select id="ent_uf" name="ent_uf">
@@ -120,7 +120,7 @@
 
         <div class="fcad-form-group">
             <label for="ent_cep">Cep:</label>
-            <input type="text" id="ent_cep" name="ent_cep" class="mask-cep" value="<?= ($ent != "") ? $ent->cep : ''; ?>">
+            <input type="text" id="ent_cep" name="ent_cep" class="mask-cep" data-url="<?= url("cep"); ?>" value="<?= ($ent != "") ? $ent->cep : ''; ?>">
         </div>
     </div>
 

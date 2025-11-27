@@ -1530,22 +1530,22 @@ $(function () {
         let $el = $(selector);
         let originalBg = $el.css('background-color');
         let ligado = false;
-    
+
         // Evita criar mais de um intervalo pro mesmo elemento
         if ($el.data('piscar-ativo')) return;
-    
+
         let intervalo = setInterval(() => {
             // Alterna a cor de fundo do elemento principal
             $el.css('background-color', ligado ? originalBg : corFundo);
-    
+
             // Se dentro do elemento existir algo com a classe .licenca-text,
             // alterna a cor do texto entre preto e vermelho
             $el.find('.licenca-text').css('color', ligado ? 'black' : 'red');
             $el.find('.licenca-text').css('font-size', ligado ? '1em' : '1.050em');
-    
+
             ligado = !ligado;
         }, tempo);
-    
+
         // Marca como ativo para não duplicar intervalos
         $el.data('piscar-ativo', true);
     }
@@ -1730,7 +1730,7 @@ $(function () {
 
     $(document).ready(function () {
 
-        $('.licenca-vencida').each(function() {
+        $('.licenca-vencida').each(function () {
             piscarElementoContinuo(this, 'yellow', 500);
         });
 
@@ -9257,5 +9257,41 @@ $(document).ready(function () {
         let modal = bootstrap.Modal.getInstance(modalEl);
         $('#modalCabecalhoPdf').modal('hide');
     });
+    //inicio função busca cep
+    //parametros: o input digitado, logradouro, cidade, bairro, uf 
+    function buscarCep(input_cep, logradouro, bairro, cidade, uf) {
+        $(input_cep).on("input", function () {
+            let cep = $(this).val().replace(/\D/g, "");
+            //let url = $(this).data("url");
+            let url = `https://viacep.com.br/ws/${cep}/json/`;
+
+            if (cep.length === 8) {
+                $.ajax({
+                    url: url,
+                    method: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        if (!data.erro) {
+                            $(logradouro).val(data.logradouro);
+                            $(bairro).val(data.bairro);
+                            $(cidade).val(data.localidade);
+                            $(uf).val(data.uf);
+                        } else {
+                            alert("CEP não encontrado!");
+                        }
+                    },
+                    error: function () {
+                        alert("Erro ao buscar o CEP.");
+                    }
+                });
+            }
+        });
+    }
+
+    buscarCep("#cep", "#logradouro", "#bairro", "#cidade", "#uf");
+    buscarCep("#ent_cep", "#ent_endereco", "#ent_bairro", "#ent_cidade", "#ent_uf");
+    
 });
+
+
 

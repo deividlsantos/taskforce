@@ -401,7 +401,49 @@ $route->group("logs");
 $route->get("/", "LogController:index");
 $route->post("/pesqLogs", "LogController:pesquisaLogs");
 $route->post("/", "LogController:selectUsers");
+$route->post("/acao", "LogController:logAcao");
 $route->get("/exp", "ExpiracaoController:enviarAvisos");
+
+$route->group('fila');
+$route->get("/", "FilaController:index");
+$route->get("/form", "FilaController:form");
+$route->get("/form/{id_fila}", "FilaController:form");
+$route->post("/salvar", "FilaController:salvar");
+$route->post("/excluir", "FilaController:excluir");
+
+$route->group('tipolocal');
+$route->get("/", "LocalTipoController:index");
+$route->get("/form", "LocalTipoController:form");
+$route->get("/form/{id_tipolocal}", "LocalTipoController:form");
+$route->post("/salvar", "LocalTipoController:salvar");
+$route->post("/excluir", "LocalTipoController:excluir");
+
+$route->group('local');
+$route->get("/", "LocalController:index");
+$route->get("/form", "LocalController:form");
+$route->get("/form/{id_local}", "LocalController:form");
+$route->post("/salvar", "LocalController:salvar");
+$route->post("/excluir", "LocalController:excluir");
+
+$route->group('atendimento');
+$route->get("/", "AtendimentoController:index");
+$route->post("/iniciaAtendimento", "AtendimentoController:iniciaAtendimento");
+$route->get("/atendente", "AtendimentoController:atendente");
+$route->post("/iniciar", "AtendimentoController:iniciar");
+$route->post("/pausar", "AtendimentoController:pausar");
+$route->post("/encerrar", "AtendimentoController:encerrar");
+
+$route->group("senhas");
+$route->get("/gerar", "FilaController:gerarSenha");
+$route->get("/chamar", "FilaController:chamarSenha");
+$route->post("/tipo", "FilaController:tipo");
+
+$route->group('cep');
+$route->post("/", "CepCacheController:buscaPorCep");
+
+
+
+
 
 
 //** TEMPORÁRIOS **//

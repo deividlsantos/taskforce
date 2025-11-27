@@ -233,7 +233,7 @@ $this->layout("_theme", $front);
                     <label class="cadastro-label" for="logradouro">Logradouro</label>
                     <input type="text" class="cadastro-input" id="logradouro" name="logradouro" value="<?= $empresa != "" ? $empresa->endereco : "" ?>">
                 </div>
-
+                                 
                 <div class="cadastro-input-group">
                     <label class="cadastro-label" for="numero">Número</label>
                     <input type="text" class="cadastro-input" id="numero" name="numero" value="<?= $empresa != "" ? $empresa->numero : "" ?>">
@@ -243,7 +243,7 @@ $this->layout("_theme", $front);
                     <label class="cadastro-label" for="bairro">Bairro</label>
                     <input type="text" class="cadastro-input" id="bairro" name="bairro" value="<?= $empresa != "" ? $empresa->bairro : "" ?>">
                 </div>
-
+                               
                 <div class="cadastro-input-group">
                     <label class="cadastro-label" for="cidade">Cidade</label>
                     <input type="text" class="cadastro-input" id="cidade" name="cidade" value="<?= $empresa != "" ? $empresa->cidade : "" ?>">
@@ -292,7 +292,7 @@ $this->layout("_theme", $front);
 
                 <div class="cadastro-input-group">
                     <label class="cadastro-label" for="cep">CEP</label>
-                    <input type="text" class="cadastro-input mask-cep" id="cep" name="cep" value="<?= $empresa != "" ? $empresa->cep : "" ?>" pattern="\d{5}-\d{3}">
+                    <input type="text" class="cadastro-input mask-cep" data-url="<?= url("cep"); ?>" id="cep" name="cep" value="<?= $empresa != "" ? $empresa->cep : "" ?>" pattern="\d{5}-\d{3}">
                 </div>
             </div>
         </section>
@@ -327,5 +327,7 @@ $this->layout("_theme", $front);
         </section>
     </form>
 </div>
-
+<script>
+    
+</script>
 </html>

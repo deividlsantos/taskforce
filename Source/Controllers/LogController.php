@@ -58,23 +58,65 @@ class LogController
 
     public function pesquisaLogs($data): void
     {
-        $tabelaUser = (new Users())->getEntity();
-        $tabelaEmp2 = (new Emp2())->getEntity();
-        // LEFT JOIN com users e emp2
-        if (!empty($data['id_emp2']) && is_array(($data['id_emp2']))) {
-            $empresas_id  = implode(", ", array_map('intval', $data['id_emp2'])); // sanitiza como int
+        $logModel = new Log();
 
-           
-        } elseif (!empty($data['id_emp2'])) {
-            $emp2 = (int)$data['id_emp2'];
-            $logs = (new Log())->find("log.id_emp2 = :id", "id={$emp2}", "log.*", false)->fetch(true);
-        } else {
-            $logs = (new Log())->find(null, null, "log.*, {$tabelaEmp2}.razao empresa_razao, {$tabelaUser}.nome usuario_nome", false)->join($tabelaEmp2, "{$tabelaEmp2}.id = log.id_emp2", "LEFT")->join($tabelaUser, "{$tabelaUser}.id = log.id_users", "LEFT")->fetch(true);
-        }
+        $normalize = function ($value) {
+            if ($value === null || $value === '' || (is_array($value) && empty($value))) {
+                return [];
+            }
+            return is_array($value) ? $value : [$value];
+        };
 
+        $id_emp2 = $normalize($data['id_emp2'] ?? []);
+        $acao = $normalize($data['acao'] ?? []);
+        $usuario = $normalize($data['usuario'] ?? []);
+        $tabela = $normalize($data['campo'] ?? []);
+        $inicial = $data['inicial'] ?? 0;
+        $final = $data['final'] ?? 0;
+        $offset = isset($data['offset']) ? (int)$data['offset'] : 0;
+        $limit  = isset($data['limit']) ? (int)$data['limit'] : 50;
 
-        echo json_encode(array_map(fn($logs) => $logs->data(), $logs ?? []));
+        $logs = $logModel->loadLogs(
+            $logModel->getEntity(),
+            $id_emp2,
+            $acao,
+            $usuario,
+            $tabela,
+            $inicial,
+            $final,
+            $offset,
+            $limit
+        );
+
+        echo json_encode($logs);
     }
 
-    
+
+    public function logAcao($data)
+    {
+
+        $logModel = new Log();
+
+        $logs = $logModel->loadAcao($data['id'], $data['status']);
+
+        $antes = parseCampos($logs['valores_antes'] ?? '');
+        $depois = parseCampos($logs['valores_depois'] ?? '');
+
+        $campos = array_unique(array_merge(array_keys($antes), array_keys($depois)));
+
+        $comparacao = [];
+        foreach ($campos as $campo) {
+            $valorAntes = $antes[$campo] ?? null;
+            $valorDepois = $depois[$campo] ?? null;
+
+            $comparacao[$campo] = [
+                "antes" => $valorAntes,
+                "depois" => $valorDepois,
+                "alterado" => $valorAntes !== $valorDepois
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($comparacao);
+    }
 }

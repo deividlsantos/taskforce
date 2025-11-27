@@ -5,6 +5,7 @@ use Dompdf\Options;
 use Source\Boot\Session;
 use Source\Boot\SqlServerConn;
 use Source\Models\Emp2;
+use Source\Models\CepCache;
 
 /**
  * ##################
@@ -1202,3 +1203,23 @@ function verificaExpiracao($data)
     // 3) Se dataBanco < hoje
     return 3;
 }
+
+function parseCampos($texto)
+{
+    $resultado = [];
+    $pares = explode(';', $texto);
+
+    foreach ($pares as $par) {
+        $partes = explode('|', $par, 2); // limita a 2 partes
+        $campo = trim($partes[0] ?? '');
+        $valor = trim($partes[1] ?? '');
+
+        if ($campo !== '') {
+            $resultado[$campo] = $valor;
+        }
+    }
+
+    return $resultado;
+}
+
+
