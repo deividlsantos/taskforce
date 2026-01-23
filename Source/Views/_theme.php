@@ -50,6 +50,8 @@
     <script src="<?= url("Source/Views/js/folhas.js?v=") . filemtime("Source/Views/js/folhas.js"); ?>"></script>
     <script src="<?= url("Source/Views/js/timeline.js?v=") . filemtime("Source/Views/js/timeline.js"); ?>"></script>
     <script src="<?= url("Source/Views/js/rascunhos.js?v=") . filemtime("Source/Views/js/rascunhos.js"); ?>"></script>
+    <script src="<?= url("Source/Views/js/nfe.js?v=") . filemtime("Source/Views/js/nfe.js"); ?>"></script>
+    <script src="<?= url("Source/Views/js/nfe-websinger.js?v=") . filemtime("Source/Views/js/nfe-websinger.js"); ?>"></script>
     <style>
         .content {
             position: relative;

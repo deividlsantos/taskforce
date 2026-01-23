@@ -441,7 +441,15 @@ $route->post("/tipo", "FilaController:tipo");
 $route->group('cep');
 $route->post("/", "CepCacheController:buscaPorCep");
 
+$route->group('contrato');
+$route->get("/pdf/{id}/{emp}", "OsController:pdfContrato");
 
+$route->group("nfe");
+$route->get("/", "NfeController:index");
+$route->post("/dados", "NfeController:emitirNfe");
+$route->post("/cliente-busca", "NfeController:clienteBusca");
+$route->get("/danfe", "NfeController:danfe");
+$route->get("/xml", "NfeController:formXml");
 
 
 

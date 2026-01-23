@@ -8793,7 +8793,7 @@ $(document).ready(function () {
     const formNovocli = $("#form-novocli");
     const modalCli = $("#modalcli");
 
-    $('#novocli, #novoclirec, #novoclipag').click(function () {
+    $('#novocli, #novoclirec, #novoclipag, #nfe-novocli').click(function () {
         $('#modalNovocli').modal('show');
         $('#form-novocli').trigger('reset');
     });
@@ -8807,6 +8807,16 @@ $(document).ready(function () {
         setTimeout(function () {
             tipoSelect.val("1").trigger("change");
         }, 100);
+    });
+    $("#nfe-novocli").on("click", function () {
+        // Limpa o formulário
+        resetForm();
+        // Atualiza o título da modal
+        modalTitle.text("Cadastrar Cliente");
+        setTimeout(function () {
+            tipoSelect.val("1").trigger("change");
+        }, 100);
+        modalCli.val("nfe");
     });
 
     // Função para configurar modal como "Cliente"
@@ -9290,7 +9300,8 @@ $(document).ready(function () {
 
     buscarCep("#cep", "#logradouro", "#bairro", "#cidade", "#uf");
     buscarCep("#ent_cep", "#ent_endereco", "#ent_bairro", "#ent_cidade", "#ent_uf");
-    
+    buscarCep("#emit_cep", "#emit_endereco", "#emit_bairro", "#emit_cidade", "#emit_estado");
+    buscarCep("#dest_cep", "#dest_endereco", "#dest_bairro", "#dest_cidade", "#dest_estado");  
 });
 
 

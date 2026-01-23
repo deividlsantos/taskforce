@@ -53,6 +53,14 @@ $this->layout("_theme", $front);
     <?php
     endif;
     ?>
+    <a href="<?= url("senhas"); ?>" class="tfdash-card tfdash-card-brown">
+        <div class="tfdash-icon"><i class="fa-solid fa-lock"></i></div>
+        <div class="tfdash-title">Senhas</div>
+    </a>
+    <a href="<?= url("nfe"); ?>" class="tfdash-card tfdash-card-orange">
+        <div class="tfdash-icon"><i class="fa-solid fa-file-invoice"></i></div>
+        <div class="tfdash-title">NFe</div>
+    </a>     
 </div>
 <section>
     <?php

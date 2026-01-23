@@ -8281,35 +8281,45 @@ input.awesomplete {
 }
 
 /* === Cores específicas === */
-.tfdash-card-green {
-    --tfdash-accent: #28a745;
-}
 
-.tfdash-card-red {
-    --tfdash-accent: #a52834;
-}
-
-.tfdash-card-blue {
-    --tfdash-accent: #007bff;
-}
-
-.tfdash-card-gray {
-    --tfdash-accent: #6c757d;
-}
-
-/* 5º card (Arquivos) com roxo */
-.tfdash-card-purple {
-    --tfdash-accent: #6f42c1;
-}
-
-/* 5º card (Arquivos) com roxo */
+/* 1º card (Pré OS) com gold */
 .tfdash-card-golden {
     --tfdash-accent: #ffc107;
 }
 
-/* 5º card (Arquivos) com roxo */
+/* 2º card (OS) com verde */
+.tfdash-card-green {
+    --tfdash-accent: #28a745;
+}
+
+/* 3º card (Financeiro) com vermelho */
+.tfdash-card-red {
+    --tfdash-accent: #a52834;
+}
+
+/* 4º card (Ponto) com azul */
+.tfdash-card-blue {
+    --tfdash-accent: #007bff;
+}
+
+/* 5º card (Cadastros) com cinza */
+.tfdash-card-gray {
+    --tfdash-accent: #6c757d;
+}
+
+/* 6º card (Arquivos) com roxo */
+.tfdash-card-purple {
+    --tfdash-accent: #6f42c1;
+}
+
+/* 7º card (Senhas) com marrom */
 .tfdash-card-brown {
     --tfdash-accent: #8B4513;
+}
+
+/* 8º card (NFe) com laranja */
+.tfdash-card-orange {
+    --tfdash-accent: #fd7e14;
 }
 
 /* garante que nunca tenha sublinhado */

@@ -1,0 +1,195 @@
+h2.titulo-nfe {
+    background: #495057;
+    padding: 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.container-nfe {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0px 0px 8px #ccc;
+}
+
+form {
+    display: block;
+}
+
+.cli-emit {
+    display: flex;
+}
+
+.emit {
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 15%;
+}
+
+.emit-pesq {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    height: 3.7vh;
+    width: 80%;
+    background-color: #fff;
+}
+
+.verifica-emit {
+    font-size: 1.5em;
+}
+
+.dest {
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 15%;
+}
+
+.dest-pesq {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.verifica-dest {
+    font-size: 1.5em;
+}
+
+.grupo-nfe {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.label-nfe {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.input-nfe{
+    width: 100%;
+    height: 3.7vh;
+    margin-top: 5px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.select-nfe {
+    width: 100%;
+
+    height: 30px;        /* altura real do input */
+    padding: 2px 8px;    /* padding menor */
+    line-height: 28px;   /* centraliza o texto */
+
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+
+    background-color: #fff;
+}
+
+
+.textarea-nfe {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.descricao-prod {
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+.impostos {
+    display: block;
+    width: 20%;
+    float: left;
+    padding: 5px;
+}
+
+.valores { 
+    width: 30%;
+    display: block;
+    float: right;
+    padding: 5px;
+}
+
+.adicionar {
+    padding: 5px;
+    text-align: center;
+    
+}
+
+.linha-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+#inputs-ocultos {
+    display: none;
+}
+
+.autocomplete {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 999;
+}
+
+.autocomplete div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.autocomplete div:hover {
+    background: #f0f0f0;
+}
+
+.descricao-prod {
+    padding: 5px;
+    display: block;
+    margin-top: 5px;
+}
+
+.produto-pesq {
+    display: block;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.imp-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+}
+
+.cts {
+    width: 30%;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.base, .valor-total {
+    width: 60%;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.percent {
+    width: 30%;
+    height: 20px;
+    border-radius: 5px;
+}
