@@ -446,10 +446,12 @@ $route->get("/pdf/{id}/{emp}", "OsController:pdfContrato");
 
 $route->group("nfe");
 $route->get("/", "NfeController:index");
-$route->post("/dados", "NfeController:emitirNfe");
-$route->post("/cliente-busca", "NfeController:clienteBusca");
 $route->get("/danfe", "NfeController:danfe");
 $route->get("/xml", "NfeController:formXml");
+$route->post("/dados", "NfeController:emitirNfe");
+$route->post("/cliente-busca", "NfeController:clienteBusca");
+$route->post("/busca_produto", "NfeController:produtoBusca");
+//$route->post("/", "NfeController:montarXml");
 
 
 

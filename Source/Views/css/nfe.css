@@ -179,17 +179,55 @@ form {
 .cts {
     width: 30%;
     height: 20px;
+    font-size: 0.8em;
     border-radius: 5px;
 }
 
 .base, .valor-total {
     width: 60%;
     height: 20px;
+    font-size: 0.8em;
     border-radius: 5px;
 }
 
 .percent {
     width: 30%;
     height: 20px;
+    font-size: 0.8em;
     border-radius: 5px;
+}
+
+/* 
+ */
+ .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.overlay-box {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 35em;
+    text-align: center;
+}
+
+.overlay-box input[type="file"],
+.overlay-box input[type="password"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.close-x {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 22px;
+    cursor: pointer;
 }

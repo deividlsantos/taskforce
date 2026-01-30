@@ -5,7 +5,9 @@ namespace Source\Controllers;
 use League\Plates\Engine;
 use Source\Models\Emp2;
 use Source\Models\Ent;
+use Source\Models\Materiais;
 use DOMDocument;
+use Source\Models\Municipios;
 
 class NfeController extends Controller
 {
@@ -22,7 +24,9 @@ class NfeController extends Controller
 
         $id_emp2 = $this->user->id_emp2;
 
-        $emp = (new Emp2())->findById($id_emp2);
+        $emp = (new Emp2())->findById($id_emp2);        
+
+        $municipio = (new Municipios())->findById($emp->municipio_id);
 
         $front = [
             "titulo"   => "Gerar NFe",
@@ -32,7 +36,8 @@ class NfeController extends Controller
 
         echo $this->view->render("tcsistemas.nfe/gerarXml", [
             "front" => $front,
-            "emp"   => $emp
+            "emp"   => $emp,
+            "municipio" => $municipio
         ]);
     }
 
@@ -41,7 +46,7 @@ class NfeController extends Controller
         $id_emp2 = $this->user->id_emp2;
 
         $emp = (new Emp2())->findById($id_emp2);
-        
+
         $front = [
             "titulo"   => "Gerar NFe",
             "user"     => $this->user,
@@ -256,6 +261,49 @@ class NfeController extends Controller
         ];
 
         return $dados;
+    }
+
+    public function produtoBusca(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(["results" => []]);
+            return;
+        }
+
+        // 🔹 termo digitado no Select2
+        $termo = trim($_POST['termo'] ?? '');
+
+        // 🔹 parâmetros base
+        $params = "";
+        $where  = "1 = 1";
+
+        // 🔍 Filtra SOMENTE pelo nome (descricao)
+        if ($termo !== '') {
+            $where .= " AND descricao LIKE :termo";
+            $params .= "&termo=%{$termo}%";
+        }
+
+        // 🔎 Busca no Model Materiais
+        $materiais = (new Materiais())
+            ->find($where, $params)
+            ->fetch(true);
+
+        $results = [];
+
+        // 🔁 Monta o retorno do Select2
+        if ($materiais) {
+            foreach ($materiais as $item) {
+                $results[] = [
+                    "id"     => $item->id,
+                    "text"   => $item->descricao, // texto exibido
+                    "valor"   => $item->valor
+                ];
+            }
+        }
+
+        echo json_encode([
+            "results" => $results
+        ]);
     }
 
     /* =====================================================
@@ -611,7 +659,7 @@ class NfeController extends Controller
             OR cpfcnpj LIKE :termoCpf
         )";
 
-            $params .= "&termo=%{$termo}%";
+            $params .= "&termo="  . urlencode("%{$termo}%");
             $params .= "&termoCpf={$termoCpf}";
         }
 
@@ -619,6 +667,8 @@ class NfeController extends Controller
             ->find($where, $params)
             ->fetch(true);
 
+        $cidade = (new Municipios())->findById($ent[0]->municipio_id);
+         
         $results = [];
 
         if ($ent) {
@@ -631,7 +681,7 @@ class NfeController extends Controller
                     "endereco" => $item->endereco,
                     "numero"   => $item->numero,
                     "bairro"   => $item->bairro,
-                    "cidade"   => $item->cidade,
+                    "cidade"   => $cidade->nome,
                     "estado"   => $item->uf,
                     "cep"      => $item->cep,
                     "fone"     => $item->fone1,

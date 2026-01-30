@@ -101,6 +101,7 @@ $(document).ready(function () {
     $('[name="numero_nf"]').prop('readonly', true);
     $('[name="serie"]').prop('readonly', true);
 
+    // CLIENTES
     $('#cliente_busca').select2({
         placeholder: 'Buscar por nome, CPF ou CNPJ',
         allowClear: true,
@@ -134,6 +135,136 @@ $(document).ready(function () {
             },
         }
     });
+
+    // PRODUTOS ////////////
+    $('#busca_produto').select2({
+        placeholder: 'Buscar por nome ou código',
+        allowClear: true,
+        minimumInputLength: 1,
+        ajax: {
+            url: $('#busca_produto').data('url'),
+            type: 'POST',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    termo: params.term || ''
+                };
+            },
+            processResults: function (data) {
+                return data;
+            }
+        }
+    });
+    let produtoSelecionado = null;
+
+    $('#busca_produto').on('select2:select', function (e) {
+        produtoSelecionado = e.params.data;
+    
+        // valores padrão
+        $('[name="prod_qtd"]').val(1);
+        $('#unit').val(produtoSelecionado.valor);
+        $('[name="prod_total"]').val(produtoSelecionado.valor);
+        $('.base').val(produtoSelecionado.valor);
+    });
+
+    function calcularTotalItem() {
+        let qtd   = parseFloat($('[name="prod_qtd"]').val()) || 0;
+        let unit  = parseFloat($('#unit').val()) || 0;
+        let total = qtd * unit;
+    
+        $('[name="prod_total"]').val(total.toFixed(2));
+        $('.base').val(total.toFixed(2));
+    }
+    
+    $('[name="prod_qtd"], #unit').on('input', calcularTotalItem);
+
+    $('#add').on('click', function (e) {
+        e.preventDefault();
+    
+        if (!produtoSelecionado) {
+            alert('Selecione um produto');
+            return;
+        }
+    
+        let id        = produtoSelecionado.id; // ID do produto
+        let descricao = produtoSelecionado.text;
+        let qtdNova   = parseFloat($('[name="prod_qtd"]').val()) || 0;
+        let unit      = parseFloat($('#unit').val()) || 0;
+    
+        if (qtdNova <= 0 || unit <= 0) {
+            alert('Quantidade e valor devem ser maiores que zero');
+            return;
+        }
+    
+        // 🔍 Verifica se o produto já existe na tabela
+        let linhaExistente = $('#produtos-tbody tr[data-produto-id="' + id + '"]');
+    
+        if (linhaExistente.length) {
+            // Produto já existe → soma a quantidade
+            let qtdAtual = parseFloat(linhaExistente.find('.qtd').text()) || 0;
+            let novaQtd  = qtdAtual + qtdNova;
+            let novoTotal = novaQtd * unit;
+    
+            linhaExistente.find('.qtd').text(novaQtd);
+            linhaExistente.find('.total-item').text(novoTotal.toFixed(2));
+        } else {
+            // Produto não existe → cria nova linha
+            let total = qtdNova * unit;
+    
+            let linha = `
+                <tr data-produto-id="${id}">
+                    <td>${descricao}</td>
+                    <td class="qtd">${qtdNova}</td>
+                    <td>${unit.toFixed(2)}</td>
+                    <td class="total-item">${total.toFixed(2)}</td>
+    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+    
+                    <td>
+                        <button class="btn btn-danger btn-sm remover">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+    
+            $('#produtos-tbody').append(linha);
+        }
+    
+        atualizarTotais();
+        limparProduto();
+    });
+    
+    $(document).on('click', '.remover', function () {
+        $(this).closest('tr').remove();
+        atualizarTotais();
+    });
+    
+    function atualizarTotais() {
+        let totalProdutos = 0;
+    
+        $('.total-item').each(function () {
+            totalProdutos += parseFloat($(this).text()) || 0;
+        });
+    
+        $('[name="total_produtos"]').val(totalProdutos.toFixed(2));
+        $('[name="total_nota"]').val(totalProdutos.toFixed(2));
+    }
+    
+    function limparProduto() {
+        produtoSelecionado = null;
+    
+        $('#busca_produto').val(null).trigger('change');
+        $('[name="prod_qtd"]').val('');
+        $('#unit').val('');
+        $('[name="prod_total"]').val('');
+    }
+    /////////
+
 
     $(document).on('click', function () {
         $('#nfe-novocli').hide();
@@ -210,4 +341,51 @@ function removerProduto(id) {
     $(`tr[data-id="${id}"]`).remove();
     $(`#hidden-${id}`).remove();
     atualizarTotalProdutos();
+}
+
+// ////////////////////////////////////////
+function abrirSenha() {
+    document.getElementById('overlaySenha').style.display = 'flex';
+}
+
+function salvarSenha() {
+    const senha = document.getElementById('senhaTeste').value;
+
+    if (!senha) {
+        alert('Digite sua senha');
+        return;
+    }
+
+    // Aqui futuramente você pode validar a senha via AJAX
+
+    document.getElementById('overlaySenha').style.display = 'none';
+}
+function fecharSenha() {
+    document.getElementById('overlaySenha').style.display = 'none';
+}
+
+function fecharCert() {
+    document.getElementById('overlayCert').style.display = 'none';
+}
+
+function salvarCert() {
+    const file = document.getElementById('pfxFile').files[0];
+    const senha = document.getElementById('senhaCert').value;
+
+    if (!file) {
+        alert('Selecione o arquivo .pfx');
+        return;
+    }
+
+    if (!senha) {
+        alert('Digite a senha do certificado');
+        return;
+    }
+
+    // 🔒 Aqui futuramente entra AJAX para enviar ao backend
+
+    console.log('PFX:', file.name);
+    console.log('Senha:', senha);
+
+    fecharCert();
 }

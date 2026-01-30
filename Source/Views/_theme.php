@@ -26,6 +26,8 @@
     <link href="<?= url("Source/Views/css/fullcalendar.css"); ?>" rel="stylesheet">
     <link href="<?= url("Source/Views/css/agenda.css?v=") . filemtime('Source/Views/css/agenda.css'); ?>"
         rel="stylesheet">
+    <link href="<?= url("Source/Views/css/nfe.css?v=") . filemtime('Source/Views/css/nfe.css'); ?>"
+        rel="stylesheet">
     <script src="<?= url("Source/Views/js/moment.min.js"); ?>"></script>
     <script src="<?= url("Source/Views/js/jquery.js"); ?>"></script>
     <script src="<?= url("Source/Views/js/app.js"); ?>"></script>

@@ -26,12 +26,12 @@
             <div style="display: flex;">
                 <div style="width: 15%; padding: 5px;">
                     <label class="label-nfe">Número da Nota</label>
-                    <input type="text" class="input-nfe" name="ide_nNF" style="background: #DCDCDC;" value="00000023">
+                    <input type="text" class="input-nfe" name="ide_nNF" style="background: #DCDCDC;" value="00000023" readonly>
                 </div>
 
                 <div style="width: 10%; padding: 5px;">
                     <label class="label-nfe">Série</label>
-                    <input type="text" class="input-nfe" name="ide_serie" style="background: #DCDCDC;" value="1">
+                    <input type="text" class="input-nfe" name="ide_serie" style="background: #DCDCDC;" value="1" readonly>
                 </div>
 
                 <div style="width: 20%; padding: 5px;">
@@ -45,6 +45,8 @@
                     <label style="font-weight: normal; margin-top: 40px; margin-left: 10px"><input type="radio" name="decisao" value="0"> Entrada</label>
                     <label style="font-weight: normal;"><input type="radio" name="decisao" value="1" checked> Saída</label>
                 </div>
+                <input type="hidden" name="ide_cUF" value="<?= $municipio->uf_id ?? ''; ?>">
+                <input type="hidden" name="ide_cMunFG" value="<?= $municipio->codigo_ibge ?? ''; ?>">
             </div>
         </div>
         <div class="cli-emit">
@@ -90,7 +92,7 @@
                 </div>
                 <div style="width: 42%; padding: 5px;">
                     <label class="label-nfe">Cidade</label>
-                    <input type="text" class="input-nfe" name="emit_xMun" id="emit_cidade" value="<?= $emp->cidade; ?>" readonly>
+                    <input type="text" class="input-nfe" name="emit_xMun" id="emit_cidade" value="<?= $municipio->nome; ?>" readonly>
                 </div>
                 <div style="width: 10%; padding: 5px;">
                     <label class="label-nfe">UF</label>
@@ -181,7 +183,7 @@
                     <label class="label-nfe">Descrição</label>
                     <select
                         class="produto-pesq"
-                        id="prod_xProd"
+                        id="busca_produto"
                         data-url="<?= url('nfe/busca_produto') ?>"></select>
                 </div>
                 <div class="valores">
@@ -191,7 +193,7 @@
 
                 <div class="valores">
                     <label class="label-nfe">Valor Unitário</label>
-                    <input type="number" id="unit" class="input-nfe" min="0.00" step="0.01" name="prod_valor" style="width: 100%;">
+                    <input type="number" id="unit" class="input-nfe" min="0.00" step="0.01" name="prod_valor" style="width: 100%;" readonly>
                 </div>
 
                 <div class="valores">
@@ -215,97 +217,97 @@
                 <label class="tc-info-label" style="background-color: #fff;">ICMS</label>
                 <div>
                     <label class="imp-label">CST</label>
-                    <input type="text" class="cts">
+                    <input type="text" class="cts" name="cstICMS">
                 </div>
                 <div>
                     <label class="imp-label">Base</label>
-                    <input type="text" class="base">
+                    <input type="text" class="base" name="bcICMS">
                 </div>
                 <div>
                     <label class="imp-label">%</label>
-                    <input type="text" class="percent">
+                    <input type="text" class="percent" name="percICMS" >
                 </div>
                 <div>
                     <label class="imp-label">Valor</label>
-                    <input type="text" class="valor-total">
+                    <input type="text" class="valor-total" name="vlrICMS">
                 </div>
             </div>
             <div class="tc-info" style="display: flex; width: 100%; padding: 10px;">
                 <label class="tc-info-label" style="background-color: #fff;">IBS</label>
                 <div>
                     <label class="imp-label">CST</label>
-                    <input type="text" class="cts">
+                    <input type="text" class="cts" name="ctsIBS">
                 </div>
 
                 <div>
                     <label class="imp-label">Base</label>
-                    <input type="text" class="base">
+                    <input type="text" class="base" name="bcIBS">
                 </div>
 
                 <div>
                     <label class="imp-label">%</label>
-                    <input type="text" class="percent">
+                    <input type="text" class="percent" name="percIBS">
                 </div>
 
                 <div>
                     <label class="imp-label">Valor</label>
-                    <input type="text" class="valor-total">
+                    <input type="text" class="valor-total" name="vlrIBS">
                 </div>
             </div>
             <div class="tc-info" style="display: flex; width: 100%; padding: 10px;">
                 <label class="tc-info-label" style="background-color: #fff;">CBS</label>
                 <div>
                     <label class="imp-label">CST</label>
-                    <input type="text" class="cts">
+                    <input type="text" class="cts" name="cstCBS">
                 </div>
 
                 <div>
                     <label class="imp-label">Base</label>
-                    <input type="text" class="base">
+                    <input type="text" class="base" name="bcCBS">
                 </div>
 
                 <div>
                     <label class="imp-label">%</label>
-                    <input type="text" class="percent">
+                    <input type="text" class="percent" name="percCBS">
                 </div>
 
                 <div>
                     <label class="imp-label">Valor</label>
-                    <input type="text" class="valor-total">
+                    <input type="text" class="valor-total" name="vlrCBS">
                 </div>
             </div>
-            <div class="tc-info" style="display: flex; width: 75.5%; float: right; padding: 10px;">
+            <div class="tc-info" style="display: flex; width: 79%; float: right; padding: 10px;">
                 <label class="tc-info-label" style="background-color: #fff;">PIS</label>
                 <div>
                     <label class="imp-label">Base</label>
-                    <input type="text" class="base">
+                    <input type="text" class="base" name="bcPIS">
                 </div>
 
                 <div>
                     <label class="imp-label">%</label>
-                    <input type="text" class="percent">
+                    <input type="text" class="percent" name="percPIS">
                 </div>
 
                 <div>
                     <label class="imp-label">Valor</label>
-                    <input type="text" class="valor-total">
+                    <input type="text" class="valor-total" name="vlrPIS">
                 </div>
             </div>
-            <div class="tc-info" style="display: flex; width: 75.5%; float: right; padding: 10px;">
+            <div class="tc-info" style="display: flex; width: 79%; float: right; padding: 10px;">
                 <label class="tc-info-label" style="background-color: #fff;">COFINS</label>
                 <div>
                     <label class="imp-label">Base</label>
-                    <input type="text" class="base">
+                    <input type="text" class="base" name="bcCOFINS">
                 </div>
 
                 <div>
                     <label class="imp-label">%</label>
-                    <input type="text" class="percent">
+                    <input type="text" class="percent" name="percCOFINS">
                 </div>
 
                 <div>
                     <label class="imp-label">Valor</label>
-                    <input type="text" class="valor-total">
+                    <input type="text" class="valor-total" name="vlrCOFINS">
                 </div>
             </div>
         </div>
